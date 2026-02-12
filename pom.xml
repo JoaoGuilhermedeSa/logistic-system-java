@@ -19,6 +19,8 @@
 
     <properties>
         <java.version>25</java.version>
+        <mockito.version>5.17.0</mockito.version>
+        <byte-buddy.version>1.17.0</byte-buddy.version>
     </properties>
 
     <dependencies>
@@ -55,6 +57,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/1.17.0/byte-buddy-agent-1.17.0.jar
+                        -XX:+EnableDynamicAgentLoading
+                    </argLine>
+                </configuration>
             </plugin>
         </plugins>
     </build>
